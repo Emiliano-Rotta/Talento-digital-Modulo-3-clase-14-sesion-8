@@ -91,37 +91,93 @@ const paisDos = {
 
 // Consigna: Crea un objeto cuentaBancaria con propiedades titular, saldo, y pin. Utiliza un Proxy para evitar el acceso a la propiedad pin desde fuera del objeto, y para asegurarte de que solo se puede modificar el saldo si se proporciona el pin correcto.
 
-const cuentaBancaria = {
-    titular: "Paulina",
-    saldo: 1000,
-    pin:1234
-}
+// const cuentaBancaria = {
+//     titular: "Paulina",
+//     saldo: 1000,
+//     pin:1234
+// }
 
-const handler = {
-    get (target, property) {
-        if(property === "pin") {
-            return "Acceso denegado a la propiedad privada"
-        }
-        return target[property]
-    },
+// const handler = {
+//     get (target, property) {
+//         if(property === "pin") {
+//             return "Acceso denegado a la propiedad privada"
+//         }
+//         return target[property]
+//     },
 
-    set(target, property, value) {
-        if(property === "saldo"){
-            if(target.pin === 1234){
-                target[property] = value
-            } else {
-                console.log("Pin incorrecto")
-            }
-        }else {
-            target[property] = value
-        }
-        return true
-    }
-}
+//     set(target, property, value) {
+//         if(property === "saldo"){
+//             if(target.pin === 1234){
+//                 target[property] = value
+//             } else {
+//                 console.log("Pin incorrecto")
+//             }
+//         }else {
+//             target[property] = value
+//         }
+//         return true
+//     }
+// }
 
-const proxyCuenta = new Proxy(cuentaBancaria, handler)
+// const proxyCuenta = new Proxy(cuentaBancaria, handler)
 
-// console.log(proxyCuenta.pin)
+// // console.log(proxyCuenta.pin)
 
-proxyCuenta.saldo = 20000
-console.log(proxyCuenta.saldo)
+// proxyCuenta.saldo = 20000
+// proxyCuenta.titular = "Rodolfo"
+
+// console.log(proxyCuenta.titular)
+
+
+//----------------------------------------------------------------------------
+//Reflect
+// Los métodos de Reflect permiten interactuar con propiedades de objetos, ejecutar funciones, y manejar el prototipo y la creación de objetos, entre otras tareas.
+
+
+// Métodos principales de Reflect:
+
+// Reflect.apply(target, argumentoThis, argumetosList)
+
+// const suma = (a,b) => a + b
+
+// Reflect.apply(): Es un método que se usa para invocar una función. 
+//Permite especificar un valor para this y pasar un array de argumentos que se aplicarán a esa función.
+
+// const resultado = Reflect.apply(suma, null, [10,20])
+
+// console.log(resultado)
+
+// const calculadora = {
+//     factor: 10,
+//     multiplicar(a,b) {
+//         return (a+b) * this.factor
+//     }
+// }
+
+// const resultadoDos = Reflect.apply(calculadora.multiplicar, calculadora, [2,5])
+// console.log(resultadoDos)
+
+//-------------------------------------
+// reflect.get  Obtiene el valor de una propiedad de un objeto, de manera mas estructurada que de la forma original: objeto.nombre
+
+// const objeto = {
+//     nombre: "Emiliano",
+//     apellido: "Rotta"
+// };
+// const value = Reflect.get(objeto, "nombre")
+// console.log(value)
+
+
+//-------------------------------------
+// Reflect.defineProperty(target, propertyKey, attributes)
+
+// const alumno = {}
+
+// const exito = Reflect.defineProperty(alumno, "nombre", {
+//     value: "Juan",
+//     writable: false //Propiedad que logra que el value, "juan" no pueda ser modificada
+// });
+
+// console.log(exito)
+// console.log(alumno.nombre)
+
