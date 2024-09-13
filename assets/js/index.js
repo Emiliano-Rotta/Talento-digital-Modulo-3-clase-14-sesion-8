@@ -181,3 +181,30 @@ const paisDos = {
 // console.log(exito)
 // console.log(alumno.nombre)
 
+//---------------------------------------------
+
+// .Ejercicios:
+// Ejercicio 1: Aplicar una función
+
+// Consigna: Utiliza Reflect.apply para aplicar una función que multiplique dos números. La función se llama multiply y debe multiplicar 5 y 3.
+// Resultado Esperado: 15
+
+const multiply = (a,b) => a * b
+
+console.log(Reflect.apply(multiply,null, [5,3]))
+
+
+// Ejercicio 2: Definir una propiedad
+
+// Consigna: Usa Reflect.defineProperty para crear una propiedad age en el objeto person con el valor 25. La propiedad no debe ser modificable.
+// Resultado Esperado: { name: 'John', age: 25 }
+
+const person = {
+    name: "John"
+}
+Reflect.defineProperty(person, "age",{
+    value: 25,
+    writable:false
+})
+
+console.log(person)
